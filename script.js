@@ -29,6 +29,25 @@ camera.position.z = 5;
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
+// Raycaster (če ga še nimaš zgoraj!)
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+// Hover efect
+window.addEventListener('mousemove', (event) => {
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObject(cube);
+
+    if (intersects.length > 0) {
+        cube.material.emissive.set(0x333333);
+    } else {
+        cube.material.emissive.set(0x000000);
+    }
+});
+
 // Resize Handler
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
