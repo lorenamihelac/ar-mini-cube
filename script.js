@@ -15,21 +15,28 @@ const material = new THREE.MeshStandardMaterial({ color: 0x0077ff });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
-// Star background
+// Stars
 const starsGeometry = new THREE.BufferGeometry();
 const starsCount = 5000;
 
-const positions = new Float32Array(starsCount * 3);
+const positions = [];
 
-for (let i = 0; i < starsCount * 3; i++) {
-    positions[i] = (Math.random() - 0.5) * 200;
+for (let i = 0; i < starsCount; i++) {
+    positions.push(
+        (Math.random() - 0.5) * 200,
+        (Math.random() - 0.5) * 200,
+        (Math.random() - 0.5) * 200
+    );
 }
 
-starsGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+starsGeometry.setAttribute(
+    'position',
+    new THREE.Float32BufferAttribute(positions, 3)
+);
 
 const starsMaterial = new THREE.PointsMaterial({
     color: 0xffffff,
-    size: 0.5
+    size: 0.7
 });
 
 const stars = new THREE.Points(starsGeometry, starsMaterial);
@@ -65,6 +72,9 @@ function animate() {
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
 
+     // Zvezde se počasi vrtijo
+    stars.rotation.y += 0.0005;
+    
     controls.update();
     renderer.render(scene, camera);
 }
