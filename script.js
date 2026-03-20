@@ -15,6 +15,26 @@ const material = new THREE.MeshStandardMaterial({ color: 0x0077ff });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
+// Star background
+const starsGeometry = new THREE.BufferGeometry();
+const starsCount = 5000;
+
+const positions = new Float32Array(starsCount * 3);
+
+for (let i = 0; i < starsCount * 3; i++) {
+    positions[i] = (Math.random() - 0.5) * 200;
+}
+
+starsGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+const starsMaterial = new THREE.PointsMaterial({
+    color: 0xffffff,
+    size: 0.5
+});
+
+const stars = new THREE.Points(starsGeometry, starsMaterial);
+scene.add(stars);
+
 // Lighting
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
