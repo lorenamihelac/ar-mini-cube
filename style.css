@@ -1,21 +1,11 @@
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #111;
 }
 
-h1 {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  margin: 0;
-  z-index: 10;
-}
-
-#canvas-container {
-  width: 100%;
-  height: 100%;
+canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
 }
